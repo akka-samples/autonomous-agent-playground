@@ -11,7 +11,7 @@ public class ReviewTasks {
 
   // prettier-ignore
   public static final Task<ReviewResult> REVIEW = Task
-    .define("Review")
+    .name("Review")
     .description("Review a document for compliance")
     .resultConformsTo(ReviewResult.class);
 }

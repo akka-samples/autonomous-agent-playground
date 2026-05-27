@@ -6,13 +6,12 @@ import akka.javasdk.annotations.Component;
 
 @Component(
   id = "technical-reviewer",
-  description = "Reviews documents for technical accuracy"
+  description = "Reviews documents for technical accuracy, correctness, and completeness"
 )
 public class TechnicalReviewer extends AutonomousAgent {
 
   @Override
   public AgentDefinition definition() {
-    return define()
-      .goal("Review documents for technical accuracy, correctness, and completeness.");
+    return define();
   }
 }

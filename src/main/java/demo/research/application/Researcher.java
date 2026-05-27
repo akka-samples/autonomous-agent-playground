@@ -14,12 +14,6 @@ public class Researcher extends AutonomousAgent {
   @Override
   public AgentDefinition definition() {
     return define()
-      .goal(
-        """
-        You are a thorough researcher. When given a topic, find key facts, \
-        important details, and relevant context. \
-        """
-      )
       .capability(TaskAcceptance.of(ResearchTasks.FINDINGS).maxIterationsPerTask(3));
   }
 }
