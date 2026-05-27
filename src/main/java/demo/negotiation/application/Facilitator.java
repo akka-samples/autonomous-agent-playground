@@ -6,18 +6,18 @@ import akka.javasdk.agent.autonomous.capability.Moderation;
 import akka.javasdk.agent.autonomous.capability.TaskAcceptance;
 import akka.javasdk.annotations.Component;
 
-@Component(id = "facilitator", description = "Facilitates negotiations between parties")
+@Component(
+  id = "facilitator",
+  description = """
+  Facilitates negotiations by directing parties through structured rounds \
+  of offers and counteroffers to reach agreement\
+  """
+)
 public class Facilitator extends AutonomousAgent {
 
   @Override
   public AgentDefinition definition() {
     return define()
-      .goal(
-        """
-        Facilitate negotiations by directing each psarty through structured rounds \
-        of offers and counteroffers to reach agreement.
-        """
-      )
       .capability(TaskAcceptance.of(NegotiationTasks.NEGOTIATE))
       .capability(Moderation.of(Buyer.class, Seller.class).maxRounds(10));
   }
