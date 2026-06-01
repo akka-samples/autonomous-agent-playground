@@ -55,7 +55,6 @@ public class QuestionAnswererIntegrationTest extends TestKitSupport {
       });
   }
 
-
   @Test
   public void shouldFailTaskWhenModelCallsFailTask() {
     model.fixedResponse(

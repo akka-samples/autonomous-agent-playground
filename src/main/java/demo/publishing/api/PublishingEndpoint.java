@@ -144,7 +144,6 @@ public class PublishingEndpoint extends AbstractHttpEndpoint {
     return "Approved";
   }
 
-
   /** Human rejects the draft — assigns and fails the approval task. */
   @Post("/reject/{approvalTaskId}")
   public String reject(String approvalTaskId, RejectRequest request) {
@@ -152,7 +151,6 @@ public class PublishingEndpoint extends AbstractHttpEndpoint {
     componentClient.forTask(approvalTaskId).fail(request.reason());
     return "Rejected";
   }
-
 
   /** Check the status of the final publish task. */
   @Get("/status/{taskId}")

@@ -51,7 +51,6 @@ public class DynamicEndpoint extends AbstractHttpEndpoint {
     return new TaskResponse(taskId, agentId, "dynamic-agent");
   }
 
-
   @Post("/translate")
   public TaskResponse translate(TaskRequest request) {
     var agentId = requestContext()

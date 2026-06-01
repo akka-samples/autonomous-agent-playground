@@ -83,7 +83,6 @@ public class HandoffIntegrationTest extends TestKitSupport {
       });
   }
 
-
   @Test
   public void shouldHandoffToTechnicalSpecialist() {
     // Triage agent classifies as technical and hands off

@@ -35,7 +35,6 @@ public class ResearchDelegationIntegrationTest extends TestKitSupport {
       .withModelProvider(Analyst.class, analystModel);
   }
 
-
   @Test
   public void shouldDelegateToWorkersAndSynthesizeResult() {
     // Coordinator delegates to both workers
@@ -120,7 +119,6 @@ public class ResearchDelegationIntegrationTest extends TestKitSupport {
         assertThat(result.keyFindings()).hasSize(4);
       });
   }
-
 
   @Test
   public void shouldRetryFindingsAfterSourcesRejection() {
