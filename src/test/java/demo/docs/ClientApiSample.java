@@ -12,11 +12,15 @@ import demo.devteam.application.DeveloperTasks;
 import demo.docreview.application.ReviewResult;
 import demo.docreview.application.ReviewTasks;
 import demo.helloworld.application.QuestionAnswerer;
+import demo.pipeline.application.PipelineTasks;
 import demo.pipeline.application.ReportAgent;
+import demo.publishing.application.ApprovalDecision;
+import demo.publishing.application.PublishingTasks;
 import demo.research.application.ResearchBrief;
 import demo.research.application.ResearchTasks;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +39,27 @@ class ClientApiSample {
   ClientApiSample(ComponentClient componentClient, Materializer materializer) {
     this.componentClient = componentClient;
     this.materializer = materializer;
+  }
+
+  void createTask(String topic) {
+    var taskId = UUID.randomUUID().toString();
+    componentClient
+      .forTask(taskId)
+      .create(PipelineTasks.COLLECT.instructions("Collect data on: " + topic));
+  }
+
+  void assignTask(String taskId) {
+    componentClient.forTask(taskId).assign("alice@example.com");
+  }
+
+  void completeTask(String taskId) {
+    componentClient
+      .forTask(taskId)
+      .complete(PublishingTasks.APPROVAL, new ApprovalDecision("alice", "Looks good"));
+  }
+
+  void failTask(String taskId) {
+    componentClient.forTask(taskId).fail("Approval rejected: tone is too informal");
   }
 
   void terminate(String agentInstanceId) {
@@ -66,7 +91,8 @@ class ClientApiSample {
     var snapshot = componentClient.forTask(taskId).get(ResearchTasks.BRIEF);
     if (snapshot.status() == TaskStatus.COMPLETED) {
       ResearchBrief brief = snapshot.result().orElseThrow();
-      log.info("{}: {}", brief.title(), brief.keyFindings());
+      var title = brief.title();
+      var findings = brief.keyFindings();
     }
   }
 
